@@ -39,16 +39,16 @@ public class Alien : MonoBehaviour {
     }
 
     private void StartAttack() {
-        Debug.Log("startAttack");
+        //Debug.Log("startAttack");
         if (!isAttacking) {
             isAttacking = true;
-            Debug.Log("Set Anim Atk");
+            //Debug.Log("Set Anim Atk");
             anim.SetTrigger("attack");
         }
     }
 
     public void Attack() {
-        Debug.Log("Attacking");
+        //Debug.Log("Attacking");
         atkDlyTimer = Random.Range(timeBtwAtkMinMax.x, timeBtwAtkMinMax.y);
         isAttacking = false;
         Instantiate(slimeBallPrefab, slimeBallSpawnPos.position, Quaternion.identity);

@@ -61,7 +61,7 @@ public class SceneController : MonoBehaviour {
 
         float fSpeed = Mathf.Abs((faderCanvasGroup.alpha - alpha) / fadeDuration);
         while (!Mathf.Approximately(faderCanvasGroup.alpha, alpha)) {
-            faderCanvasGroup.alpha = Mathf.MoveTowards(faderCanvasGroup.alpha, alpha, fadeDuration * Time.deltaTime);
+            faderCanvasGroup.alpha = Mathf.MoveTowards(faderCanvasGroup.alpha, alpha, fSpeed * Time.deltaTime);
             yield return null;
         }
 

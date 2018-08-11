@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4095002484923282}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: JetPackPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 61261048648377934}
   - component: {fileID: 50932923481828010}
   - component: {fileID: 95512819173740754}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4579049204350692}
   - component: {fileID: 61637198579124220}
   - component: {fileID: 114799831483809834}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1354552199769648}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.311, y: -0.14, z: 0}
+  m_LocalPosition: {x: -0.259, y: 0.042, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4774379654250918}
@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1510441630434090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.29, y: -6.45, z: 0}
+  m_LocalPosition: {x: 29.59, y: -5.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4579049204350692}
@@ -132,7 +132,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1510441630434090}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 947333096707a1e419f0cf913e321463, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -161,7 +161,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01925373, y: -0.49562597}
+  m_Offset: {x: -0.016623497, y: -0.49562597}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -172,7 +172,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3950882, y: 0.18274117}
+  m_Size: {x: 0.2530384, y: 0.18274117}
   m_EdgeRadius: 0
 --- !u!95 &95512819173740754
 Animator:
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d78f4fdf46ff046b83b98b50eed694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 100
+  jumpForce: 200
   maxJumpSpeed: 5
   gravityScale: 0.4
   moveSpeed: 3.5
@@ -216,6 +216,10 @@ MonoBehaviour:
   jetPackPos: {fileID: 4095002484923282}
   jetPackParticles: {fileID: 198526659516424948, guid: 34ecb6819034952419150225b98de448,
     type: 2}
+  jumpToRocketForce: {x: 50, y: 0}
+  timeToDespawn: 0.65
+  endRocket: {fileID: 0}
+  boxCollider: {fileID: 61261048648377934}
 --- !u!114 &114799831483809834
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,10 +25,11 @@ public class Player : MonoBehaviour {
     private bool isJumping = false;
 
     [HideInInspector]
-    public bool isMoving = true;
+    public bool isMoving = false;
 
     private Animator anim;
     private bool isFalling = false;
+
     public float fallMultiplier = 1.5f;
 
     public Transform startPosition;
@@ -40,22 +42,49 @@ public class Player : MonoBehaviour {
     private int jetPackUsesLeft;
     private bool useJetPack = false;
 
+    public Vector2 jumpToRocketForce;
+    public float timeToDespawn;
+    
+    public Rocket endRocket;
+    private bool jumpToRocket = false;
+
+    private bool ignoreInput = false;
+
+    private bool moveSpeedTowardsZero = false;
+
+    private IngameMenu menu;
+    public BoxCollider2D boxCollider;
+
     private void Awake() {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        FindObjectOfType<IngameMenu>().OnRestart += Reset;
+        menu = FindObjectOfType<IngameMenu>();
         jetPackUsesLeft = jetPackUses;
+    }
+
+    private void OnEnable() {
+        menu.OnRestart += Reset;
+    }
+
+    private void OnDisable() {
+        menu.OnRestart += Reset;
     }
 
     // Use this for initialization
     void Start () {
         rb.gravityScale = gravityScale;
+        menu.SetJetPackCharges(jetPackUsesLeft, jetPackUses);
+        Invoke("StartMoving", 1.5f);
 	}
+
+    private void StartMoving() {
+        isMoving = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {
         //Check for input
-        if (!IngameMenu.isPaused) { 
+        if (!IngameMenu.isPaused && !ignoreInput) { 
             if (Input.GetKey(KeyCode.Space)) {
                 if(isGrounded && !isJumping)
                     jump = true;
@@ -64,6 +93,7 @@ public class Player : MonoBehaviour {
                 if (isJumping && jetPackUsesLeft > 0) {
                     useJetPack = true;
                     jetPackUsesLeft--;
+                    menu.SetJetPackCharges(jetPackUsesLeft, jetPackUses);
                 }
             }
             if (Input.GetKeyDown(KeyCode.X)) {
@@ -76,6 +106,14 @@ public class Player : MonoBehaviour {
             }
         }
 
+        if (moveSpeedTowardsZero && moveSpeed > 0) {
+            moveSpeed = Mathf.MoveTowards(moveSpeed, 0, 7 * Time.deltaTime);
+            if (moveSpeed <= 0) {
+                rb.velocity = Vector2.zero;
+                isMoving = false;
+            }
+        }
+
         if (rb.velocity.y < -0.25f && !isFalling && isJumping) {
             anim.SetTrigger("falling");
             isFalling = true;
@@ -84,13 +122,14 @@ public class Player : MonoBehaviour {
         if (isGrounded && isFalling) {
             isFalling = false;
             isJumping = false;
+            anim.ResetTrigger("falling");
             anim.SetTrigger("grounded");
         }
     }
 
     private void FixedUpdate() {
         
-        if (isMoving && isGrounded) {
+        if (isMoving) {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
         }
         if (jump) {
@@ -98,6 +137,12 @@ public class Player : MonoBehaviour {
             jump = false;
             isJumping = true;
             anim.SetTrigger("jump");
+        }
+
+        if (jumpToRocket) {
+            rb.AddForce(jumpToRocketForce);
+            useJetPack = true;
+            jumpToRocket = false;
         }
 
         if (useJetPack) {
@@ -119,16 +164,63 @@ public class Player : MonoBehaviour {
         rb.gravityScale = gravityScale;
     }
 
+
+    public void TransitioningToNextLevel() {
+        ignoreInput = true;
+        gameObject.tag = "Inactive";
+        rb.velocity = Vector2.zero;
+        saveMoveSpeed = moveSpeed;
+        moveSpeedTowardsZero = true;
+        anim.SetTrigger("idle");
+        StartCoroutine(Despawn());
+    }
+
+    private IEnumerator Despawn() {
+        yield return menu.ShowLevelComplete();
+    }
+
+    public IEnumerator JumpToRocket() {
+        jumpToRocket = true;
+        boxCollider.isTrigger = true;
+
+        yield return new WaitForSeconds(timeToDespawn);
+        jumpToRocket = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        moveSpeed = 0;
+        rb.velocity = Vector2.zero;
+
+        yield return new WaitForSeconds(1f);
+        if (endRocket == null) {
+            Debug.LogError("No End rocket found...");
+        }
+        else {
+            endRocket.Launch();
+        }
+    }
+
     public void Reset() {
+        StopAllCoroutines();
+        ignoreInput = false;
         //Reset position
         transform.position = startPosition.position;
         //Reset speed
         rb.velocity = Vector2.zero;
+        isMoving = true;
         //reset jump
         jump = false;
         isJumping = false;
         isFalling = false;
+        //reset jetpack
         jetPackUsesLeft = jetPackUses;
+        menu.SetJetPackCharges(jetPackUsesLeft, jetPackUses);
+
+        if (moveSpeed == 0)
+            moveSpeed = saveMoveSpeed;
+        
+        boxCollider.isTrigger = false;
+        moveSpeedTowardsZero = false;
+
+        gameObject.tag = "Player";
 
         //Reset Animator
         anim.ResetTrigger("falling");
