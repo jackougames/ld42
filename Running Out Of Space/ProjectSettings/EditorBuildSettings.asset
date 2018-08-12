@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SceneController.unity
     guid: 0152d5867fe5f664da9a4c0b4ef9ac25
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 1ff4ad42c273ddf4a949bad650188ced
+  - enabled: 1
     path: Assets/Scenes/Moon.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1

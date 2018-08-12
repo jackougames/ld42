@@ -13,6 +13,7 @@ public class ObstacleCheck : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.tag == "Player") {
             Debug.Log("Hit Obstacle!");
+            FindObjectOfType<Player>().PlayHitSound();
             menu.ShowMenu(true);
         }
     }

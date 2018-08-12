@@ -211,7 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faderCanvasGroup: {fileID: 767620498}
   fadeDuration: 1
-  startingSceneName: Moon
+  startingSceneName: MainMenu
 --- !u!4 &535469987
 Transform:
   m_ObjectHideFlags: 0
@@ -299,7 +299,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &767620497
 RectTransform:
