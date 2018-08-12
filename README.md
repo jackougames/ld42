@@ -15,9 +15,6 @@ With the theme in mind I went for a "space" focussed control system. All you nee
 
 ## Play SpaceRunner
 
-You can either download the game for Windows and MacOSX, or you can play it right now in your webbrowser.
+You can play it right now in your webbrowser.
 
 [Play right now! - WebGL]()
-
-[Windows Download]()
-[MacOSX DOwnload]()
