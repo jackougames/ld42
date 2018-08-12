@@ -17,4 +17,4 @@ With the theme in mind I went for a "space" focussed control system. All you nee
 
 You can play it right now in your webbrowser.
 
-[Play right now! - WebGL]()
+[Play right now! - WebGL](play.html)
