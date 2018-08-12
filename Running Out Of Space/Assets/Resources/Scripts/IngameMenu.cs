@@ -234,7 +234,9 @@ public class IngameMenu : MonoBehaviour {
 
     public void LoadMainMenu() {
         Debug.Log("Loading Menu");
-        //sceneController.LoadScene("MainMenu");
+        Time.timeScale = 1f;
+        FindObjectOfType<Player>().gameObject.SetActive(false);
+        FindObjectOfType<SceneController>().LoadScene("MainMenu");
     }
 
     public void QuitGame() {
