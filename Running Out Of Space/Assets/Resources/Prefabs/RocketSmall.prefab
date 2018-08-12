@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 61379081353222084}
   - component: {fileID: 50669133752934884}
   - component: {fileID: 58917035289970852}
+  - component: {fileID: 82402805390107412}
   m_Layer: 0
   m_Name: RocketSmall
   m_TagString: Untagged
@@ -61,22 +62,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1687923966755578
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4541189116063804}
-  - component: {fileID: 82528627779617820}
-  m_Layer: 0
-  m_Name: Audio Source
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4249324219698300
 Transform:
   m_ObjectHideFlags: 1
@@ -84,24 +69,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1476465728523926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.247, y: -0.85, z: 0}
+  m_LocalPosition: {x: -0.4, y: -1.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4745690941828642}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4541189116063804
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1687923966755578}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4745690941828642}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4554465905852034
 Transform:
@@ -110,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1668928326134252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.208, y: -0.85, z: 0}
+  m_LocalPosition: {x: 0.089, y: -1.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4745690941828642}
@@ -123,12 +95,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344207982055948}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 85.04, y: -7.884, z: 0}
+  m_LocalPosition: {x: 85.04, y: -7.911, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4249324219698300}
   - {fileID: 4554465905852034}
-  - {fileID: 4541189116063804}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -164,9 +135,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.011133194, y: -0.68351865}
+  m_Offset: {x: 0.011133194, y: -0.7052443}
   serializedVersion: 2
-  m_Radius: 0.35219026
+  m_Radius: 0.3739159
 --- !u!61 &61379081353222084
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -192,18 +163,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1588097, y: 2.20501}
   m_EdgeRadius: 0
---- !u!82 &82528627779617820
+--- !u!82 &82402805390107412
 AudioSource:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1687923966755578}
+  m_GameObject: {fileID: 1344207982055948}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -298,13 +269,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4bffb38a192c648b1cbb2f96c2a009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 1050
-  acceleration: 0.075
+  launchForce: 1000
+  acceleration: 0.055
   nextLevel: Mars
-  rocketParticles: {fileID: 198526659516424948, guid: 34ecb6819034952419150225b98de448,
+  rocketParticles: {fileID: 1935478258895886, guid: 1cc15240bbf88dc45a791b99829e38f5,
     type: 2}
   leftTurbine: {fileID: 4249324219698300}
   rightTurbine: {fileID: 4554465905852034}
+  rocketLaunchSFX: {fileID: 8300000, guid: 675a47a5a1d285249a98aa80a2102fc9, type: 3}
 --- !u!212 &212694870745535526
 SpriteRenderer:
   m_ObjectHideFlags: 1

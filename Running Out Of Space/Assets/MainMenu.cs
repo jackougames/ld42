@@ -13,9 +13,7 @@ public class MainMenu : MonoBehaviour {
             Play();
         }
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (helpWindow.activeSelf) {
-                CloseHelpWindow();
-            }
+            Help();
         }
     }
 
@@ -28,11 +26,12 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void Help() {
-        helpWindow.SetActive(true);
-    }
-
-    public void CloseHelpWindow() {
-        helpWindow.SetActive(false);
+        if (helpWindow.activeInHierarchy) {
+            helpWindow.SetActive(false);
+        }
+        else {
+            helpWindow.SetActive(true);
+        }
     }
 
 }

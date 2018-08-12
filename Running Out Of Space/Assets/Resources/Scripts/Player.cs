@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
     public Rocket endRocket;
     private bool jumpToRocket = false;
 
-    private bool ignoreInput = false;
+    public bool ignoreInput = false;
 
     private bool moveSpeedTowardsZero = false;
 
@@ -93,6 +93,7 @@ public class Player : MonoBehaviour {
             if (Input.GetKey(KeyCode.Space) || Input.GetKeyDown(KeyCode.Space)) {
                 if(isGrounded && !isJumping && !isFalling) { 
                     jump = true;
+                    Debug.Log("jump");
                 }
                 else if (!isGrounded && jetPackUsesLeft > 0 && Input.GetKeyDown(KeyCode.Space)) {
                     useJetPack = true;
@@ -222,6 +223,7 @@ public class Player : MonoBehaviour {
 
     public void PlayHitSound() {
         int i = UnityEngine.Random.Range(0, hitClips.Length - 1);
+        ignoreInput = true;
         audioSource.PlayOneShot(hitClips[i]);
     }
 

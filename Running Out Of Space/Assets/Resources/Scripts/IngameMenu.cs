@@ -136,6 +136,7 @@ public class IngameMenu : MonoBehaviour {
     }
 
     public void ShowMenu(bool isRestart = false) {
+        FindObjectOfType<Player>().ignoreInput = true;
         if (isRestart) {
             isRestartingMenu = true;
             LoadRestartMenu();

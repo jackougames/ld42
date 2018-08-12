@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mars.unity
     guid: 4b70038f1e74dbe44b68e66019016e4c
+  - enabled: 1
+    path: Assets/Scenes/MainMenuFinish.unity
+    guid: 4ec15b0823913de458ac8b0bbf1bf3bb
   m_configObjects: {}

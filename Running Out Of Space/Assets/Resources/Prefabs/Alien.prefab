@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1877933629984898}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.44, y: 0.4699998, z: 0}
+  m_LocalPosition: {x: 61.99, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4522339731920474}
@@ -170,7 +170,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -257,8 +257,8 @@ MonoBehaviour:
   patrolPointA: {fileID: 0}
   patrolPointB: {fileID: 0}
   moveSpeed: 1.25
-  patrolPauseMinMax: {x: 1, y: 2.5}
-  patrolRandomSwitch: 10
+  patrolPauseMinMax: {x: 2, y: 3.5}
+  patrolRandomSwitch: 5
   patrolRandomCheck: 2
   atkSFX:
   - {fileID: 8300000, guid: c7939f9f05edb8748bc8ec0a854471c9, type: 3}

@@ -9,7 +9,7 @@ public class Rocket : MonoBehaviour {
 
     public string nextLevel = "";
 
-    public ParticleSystem rocketParticles;
+    public GameObject rocketParticles;
     public Transform leftTurbine;
     public Transform rightTurbine;
 
@@ -17,15 +17,24 @@ public class Rocket : MonoBehaviour {
 
     private bool launch = false;
 
+    private AudioSource audioSource;
+    public AudioClip rocketLaunchSFX;
+
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Launch() {
-        launch = true;
+        Invoke("SetLaunch", 1f);
+        audioSource.PlayOneShot(rocketLaunchSFX);
         GetComponent<BoxCollider2D>().isTrigger = true;
-        Instantiate(rocketParticles, leftTurbine.position, Quaternion.Euler(270f, 0, 0), transform);
-        Instantiate(rocketParticles, rightTurbine.position, Quaternion.Euler(270f, 0, 0), transform);
+        Instantiate(rocketParticles, leftTurbine.position, Quaternion.Euler(0, 180f, 0), transform);
+        Instantiate(rocketParticles, rightTurbine.position, Quaternion.Euler(0, 180f, 0), transform);
+    }
+
+    private void SetLaunch() {
+        launch = true;
     }
 
     private void FixedUpdate() {
@@ -41,8 +50,12 @@ public class Rocket : MonoBehaviour {
                 Debug.LogWarning("Next level path not found. String empty!");
                 return;
             }
-            FindObjectOfType<SceneController>().LoadScene(nextLevel);
+            Invoke("AdvanceScene", 1.5f);
         }
+    }
+
+    private void AdvanceScene() {
+        FindObjectOfType<SceneController>().LoadScene(nextLevel);
     }
 
 }

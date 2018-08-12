@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1017316240531016}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -13.43, y: -5.99, z: -10.03125}
+  m_LocalPosition: {x: 533.1616, y: 549.7, z: -10.03125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,7 +53,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e47e7ab05b92b644aa7f38004f93b691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondsTillDestroy: 2
 --- !u!198 &198526659516424948
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -678,13 +677,13 @@ ParticleSystem:
     serializedVersion: 5
     enabled: 1
     type: 4
-    angle: 30
+    angle: 60
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 0, y: 180, z: 0}
+    m_Rotation: {x: 0, y: 180, z: 120}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -765,7 +764,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 0
+      value: 20
       mode: 0
       spread: 0
       speed:
@@ -2154,7 +2153,7 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -2
+      scalar: -0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
