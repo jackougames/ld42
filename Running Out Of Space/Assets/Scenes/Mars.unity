@@ -6700,6 +6700,11 @@ Prefab:
       propertyPath: m_Name
       value: RocketEnd
       objectReference: {fileID: 0}
+    - target: {fileID: 114575090486845918, guid: cb1bd68011b37fc4e88a839d6170a3a6,
+        type: 2}
+      propertyPath: nextLevel
+      value: MainMenu
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb1bd68011b37fc4e88a839d6170a3a6, type: 2}
   m_IsPrefabAsset: 0
