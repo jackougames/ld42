@@ -1,0 +1,14 @@
+{
+"companyName": "JackousGames",
+"productName": "SpaceRunner",
+"dataUrl": "v0.3b.data.unityweb",
+"wasmCodeUrl": "v0.3b.wasm.code.unityweb",
+"wasmFrameworkUrl": "v0.3b.wasm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"backgroundUrl": "v0.3b.jpg",
+"splashScreenStyle": "Dark",
+"backgroundColor": "#FFFFFF",
+"cacheControl": {"default": "must-revalidate"}
+}
