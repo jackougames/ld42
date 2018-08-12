@@ -30,8 +30,6 @@ public class Player : MonoBehaviour {
     private Animator anim;
     private bool isFalling = false;
 
-    public float fallMultiplier = 1.5f;
-
     public Transform startPosition;
 
     public float jetPackForce = 50f;
@@ -55,11 +53,18 @@ public class Player : MonoBehaviour {
     private IngameMenu menu;
     public BoxCollider2D boxCollider;
 
+    private AudioSource audioSource;
+    public AudioClip[] hitClips;
+    public AudioClip jetPackSFX;
+    public AudioClip jetPackFailSFX;
+    private float failSFXTimer = 0;
+
     private void Awake() {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         menu = FindObjectOfType<IngameMenu>();
         jetPackUsesLeft = jetPackUses;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable() {
@@ -85,15 +90,17 @@ public class Player : MonoBehaviour {
 	void Update () {
         //Check for input
         if (!IngameMenu.isPaused && !ignoreInput) { 
-            if (Input.GetKey(KeyCode.Space)) {
-                if(isGrounded && !isJumping)
+            if (Input.GetKey(KeyCode.Space) || Input.GetKeyDown(KeyCode.Space)) {
+                if(isGrounded && !isJumping && !isFalling) { 
                     jump = true;
-            }
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                if (isJumping && jetPackUsesLeft > 0) {
+                }
+                else if (!isGrounded && jetPackUsesLeft > 0 && Input.GetKeyDown(KeyCode.Space)) {
                     useJetPack = true;
                     jetPackUsesLeft--;
                     menu.SetJetPackCharges(jetPackUsesLeft, jetPackUses);
+                }else if(jetPackUsesLeft <= 0 && failSFXTimer <= 0 && Input.GetKeyDown(KeyCode.Space)) {
+                    audioSource.PlayOneShot(jetPackFailSFX);
+                    failSFXTimer = 1f;
                 }
             }
             if (Input.GetKeyDown(KeyCode.X)) {
@@ -106,6 +113,9 @@ public class Player : MonoBehaviour {
             }
         }
 
+        if(failSFXTimer > 0)
+            failSFXTimer -= Time.deltaTime;
+
         if (moveSpeedTowardsZero && moveSpeed > 0) {
             moveSpeed = Mathf.MoveTowards(moveSpeed, 0, 7 * Time.deltaTime);
             if (moveSpeed <= 0) {
@@ -116,6 +126,7 @@ public class Player : MonoBehaviour {
 
         if (rb.velocity.y < -0.25f && !isFalling && isJumping) {
             anim.SetTrigger("falling");
+            anim.ResetTrigger("jump");
             isFalling = true;
         }
 
@@ -134,7 +145,6 @@ public class Player : MonoBehaviour {
         }
         if (jump) {
             rb.AddForce(new Vector3(0, jumpForce));
-            jump = false;
             isJumping = true;
             anim.SetTrigger("jump");
         }
@@ -145,17 +155,24 @@ public class Player : MonoBehaviour {
             jumpToRocket = false;
         }
 
-        if (useJetPack) {
+        if (useJetPack && !jump) {
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector3(0, jetPackForce));
+            audioSource.PlayOneShot(jetPackSFX);
             Instantiate(jetPackParticles, jetPackPos.position, Quaternion.Euler(270f, 0, 0), transform);
+            if(!isJumping && !isFalling) {
+                isFalling = true;
+            }
             anim.SetTrigger("jetPack");
-            useJetPack = false;
         }
 
         if(rb.velocity.y > maxJumpSpeed) {
             rb.velocity = new Vector2(rb.velocity.x, maxJumpSpeed);
         }
+
+        //resets
+        useJetPack = false;
+        jump = false;
 
     }
     
@@ -196,6 +213,16 @@ public class Player : MonoBehaviour {
         else {
             endRocket.Launch();
         }
+    }
+
+    public void ChargeJetPack() {
+        jetPackUsesLeft++;
+        menu.SetJetPackCharges(jetPackUsesLeft, jetPackUses);
+    }
+
+    public void PlayHitSound() {
+        int i = UnityEngine.Random.Range(0, hitClips.Length - 1);
+        audioSource.PlayOneShot(hitClips[i]);
     }
 
     public void Reset() {

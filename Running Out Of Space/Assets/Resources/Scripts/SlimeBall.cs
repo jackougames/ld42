@@ -14,9 +14,14 @@ public class SlimeBall : MonoBehaviour {
 
     public ParticleSystem explodeParticles;
 
+    private AudioSource audioSource;
+    public AudioClip[] slimeFX;
+
     private void Awake() {
 
         menu = FindObjectOfType<IngameMenu>();
+
+        audioSource = GetComponent<AudioSource>();
 
         //Get target position for this ball
         Vector3 targetPosition = FindObjectOfType<Player>().GetComponent<Transform>().position;
@@ -35,6 +40,8 @@ public class SlimeBall : MonoBehaviour {
 
     private void Start() {
         speed = FindObjectOfType<Player>().moveSpeed * 1.5f;
+        if (speed <= 0)
+            Destroy(gameObject);
     }
 
     private void OnEnable() {
@@ -72,10 +79,16 @@ public class SlimeBall : MonoBehaviour {
         //Debug.Log("Explode slime");
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<CircleCollider2D>().enabled = false;
+
+        int i = Random.Range(0, slimeFX.Length - 1);
+        audioSource.PlayOneShot(slimeFX[i]);
+
         Instantiate(explodeParticles, transform.position, Quaternion.identity);
 
-        if (hitPlayer)
+        if (hitPlayer) {
+            FindObjectOfType<Player>().PlayHitSound();
             yield return StartCoroutine(ShowRestartMenu());
+        }
 
         Destroy(gameObject);
     }

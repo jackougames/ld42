@@ -53,6 +53,7 @@ public class IngameMenu : MonoBehaviour {
     private bool resourceBonus = false;
     private bool jetPackBonus = false;
     private int levelPoints;
+    private bool ignoreInput = false;
 
     private void Awake() {
         sceneController = FindObjectOfType<SceneController>();
@@ -122,12 +123,14 @@ public class IngameMenu : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (isPaused) {
-                OnMainBtnClick();
-            }
-            else {
-                ShowMenu();
+        if (!ignoreInput) {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                if (isPaused) {
+                    OnMainBtnClick();
+                }
+                else {
+                    ShowMenu();
+                }
             }
         }
     }
@@ -151,6 +154,7 @@ public class IngameMenu : MonoBehaviour {
     }
 
     public IEnumerator ShowLevelComplete() {
+        ignoreInput = true;
         levelFinishedUI.SetActive(true);
 
         yield return StartAddingPoints();
@@ -239,6 +243,7 @@ public class IngameMenu : MonoBehaviour {
 
     //Reset Menu here
     private void ResetMenu() {
+        ignoreInput = false;
         SetJetPackTextColor(Color.green);
         SetResourceTextColor(Color.red);
         StopAllCoroutines();
