@@ -3421,7 +3421,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 248832836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.940694, y: -4.931788, z: -15}
+  m_LocalPosition: {x: -8.938194, y: -4.931788, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3598,6 +3598,11 @@ Prefab:
         type: 2}
       propertyPath: pointsPerResource
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114244533653480506, guid: 0ecee9885377a60499f93add10e82e6e,
+        type: 2}
+      propertyPath: m_IgnoreReversedGraphics
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ecee9885377a60499f93add10e82e6e, type: 2}
@@ -5084,7 +5089,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1741112228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.928346, y: -6.35, z: -15}
+  m_LocalPosition: {x: -11.927496, y: -6.35, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1975480277}
@@ -5327,7 +5332,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2052412647}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
